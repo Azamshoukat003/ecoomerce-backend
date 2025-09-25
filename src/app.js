@@ -15,6 +15,9 @@ app.use(express.json({ limit: "16kb" })); //set limit on sending json data
 app.use(express.urlencoded({ extended: true, limit: "16kb" })); //set limit on url data
 app.use(express.static("public")); // for setting images/faicon in folder
 app.use(cookieParser());
+app.get("/", (req, res) => {
+  res.send("Backend is running ✅");
+});
 
 //routes import
 import userRouter from "./routes/user.routes.js";
