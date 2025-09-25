@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 import connectDB from "./db/index.js";
+import serverless from "serverless-http";
 import { app } from "./app.js";
 
 dotenv.config({
@@ -15,6 +16,8 @@ connectDB()
     .catch((err) => {
         console.log("mogo db connection Failed!!!", err);
     });
+
+export default serverless(app);
 
 // const app = express()(async () => {
 //     try {
