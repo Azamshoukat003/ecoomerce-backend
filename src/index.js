@@ -45,9 +45,9 @@ import { app } from "./app.js";
 dotenv.config({ path: "./env" });
 
 // connect to DB before handling requests
-connectDB().catch((err) => {
-  console.log("MongoDB connection failed:", err);
-});
+// connectDB().catch((err) => {
+//   console.log("MongoDB connection failed:", err);
+// });
 
 // Export serverless function for Vercel
 export default serverless(app);
