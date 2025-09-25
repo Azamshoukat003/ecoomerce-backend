@@ -17,11 +17,14 @@ import {
 
 // Initialize Firebase Admin if not already
 if (!admin.apps.length) {
-    admin.initializeApp({
-        credential: admin.credential.cert(
-            JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT)
-        ),
-    });
+    const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+
+  // Ensure private_key newlines are valid
+  serviceAccount.private_key = serviceAccount.private_key.replace(/\\n/g, "\n");
+
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+  });
 }
 
 export const googleLogin = async (req, res) => {
