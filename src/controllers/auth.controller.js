@@ -144,11 +144,13 @@ const addProduct = asyncHandler(async (req, res) => {
 });
 // update-product
 const getProduct = asyncHandler(async (req, res) => {
+    console.log("apivall")
     const products = await Product.find()
         .sort({ createdAt: -1 })
         .populate({ path: "productCategory", select: "categoryName" })
         .populate({ path: "productModel", select: "modelName" });
-
+    
+    console.log(products,'prod')
     if (products.length === 0) {
         throw new ApiError(400, "No product currently added");
     }
@@ -373,9 +375,10 @@ const heroSection = asyncHandler(async (req, res) => {
 
 const getHeroSection = asyncHandler(async (req, res) => {
     const items = await Hero.find().sort({ createdAt: -1 });
+    console.log("items",items)
 
     if (items.length === 0) {
-        throw new ApiError(401, "There is no currently hero items found");
+        throw new ApiError(404, "There is no currently hero items found");
     }
 
     return res

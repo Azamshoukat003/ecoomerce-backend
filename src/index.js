@@ -3,9 +3,7 @@ import connectDB from "./db/index.js";
 // import serverless from "serverless-http";
 import { app } from "./app.js";
 
-dotenv.config({
-    path: "./env",
-});
+dotenv.config();
 
 connectDB()
     .then(() => {
