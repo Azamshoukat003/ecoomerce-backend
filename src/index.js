@@ -1,22 +1,22 @@
-// import dotenv from "dotenv";
-// import connectDB from "./db/index.js";
+import dotenv from "dotenv";
+import connectDB from "./db/index.js";
 // import serverless from "serverless-http";
-// import { app } from "./app.js";
+import { app } from "./app.js";
 
-// dotenv.config({
-//     path: "./env",
-// });
+dotenv.config({
+    path: "./env",
+});
 
-// connectDB()
-//     .then(() => {
-//         // app.listen(process.env.PORT || 8000, () => {
-//         //     console.log(`server is running at port ${process.env.PORT}`);
-//         // });
-//         return;
-//     })
-//     .catch((err) => {
-//         console.log("mogo db connection Failed!!!", err);
-//     });
+connectDB()
+    .then(() => {
+        app.listen(process.env.PORT || 8000, () => {
+            console.log(`server is running at port ${process.env.PORT}`);
+        });
+        return;
+    })
+    .catch((err) => {
+        console.log("mogo db connection Failed!!!", err);
+    });
 
 // export default serverless(app);
 
@@ -37,18 +37,5 @@
 // //     }
 // // })();
 
-import dotenv from "dotenv";
-import connectDB from "./db/index.js";
-import serverless from "serverless-http";
-import { app } from "./app.js";
 
-dotenv.config({ path: "./env" });
-
-// connect to DB before handling requests
-connectDB().catch((err) => {
-  console.log("MongoDB connection failed:", err);
-});
-
-// Export serverless function for Vercel
-export default serverless(app);
 

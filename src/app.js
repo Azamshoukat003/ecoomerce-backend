@@ -1,7 +1,6 @@
 import express from "express";
 import cookieParser from "cookie-parser"; // for setting cokie in user browser
 import cors from "cors";
-import connectDB from "./db/index.js";
 
 
 const app = express();
