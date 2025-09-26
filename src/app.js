@@ -7,7 +7,7 @@ const app = express();
 
 app.use(
     cors({
-        origin: ["http://localhost:5173",'http://localhost:5174','https://ecoomerce-frontend-project.vercel.app',"https://ecommerce-frontend-iota-taupe.vercel.app"],
+        origin: ["http://localhost:5173",'http://localhost:5174','https://ecoomerce-frontend-project.vercel.app',"https://ecommerce-frontend-iota-taupe.vercel.app","https://ecommerce-admin-frontend-one.vercel.app"],
         credentials: true,
     })
 );
