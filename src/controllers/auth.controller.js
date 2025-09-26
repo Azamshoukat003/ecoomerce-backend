@@ -27,6 +27,13 @@ if (!admin.apps.length) {
   });
   
 }
+const cookieOptions = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production", 
+  sameSite: process.env.NODE_ENV === "none", 
+  path: "/",
+};
+
 
 export const googleLogin = async (req, res) => {
     const { idToken } = req.body; // Firebase ID token from frontend
@@ -52,11 +59,7 @@ export const googleLogin = async (req, res) => {
     // ✅ Generate your own JWT
     const tokenExpiry = "7d";
     const accessToken = await user.generateAccessToken(tokenExpiry);
-    res.cookie("accessToken", accessToken, {
-        httpOnly: true,
-        secure: false,
-        path: "/",
-    });
+    res.cookie("accessToken", accessToken,cookieOptions);
 
     res.status(201).json(
         new ApiResponse(

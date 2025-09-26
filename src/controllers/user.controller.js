@@ -12,9 +12,10 @@ function generateOTP() {
 }
 
 const cookieOptions = {
-    httpOnly: true,
-    secure: false,
-    path: "/",
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production", 
+  sameSite:"none",
+  path: "/",
 };
 
 const registerUser = asyncHandler(async (req, res) => {
