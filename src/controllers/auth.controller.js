@@ -202,7 +202,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     );
 
     if (!product) {
-        throw new ApiError(404, "Product not found");
+        throw new ApiError(403, "Product not found");
     }
 
     res.status(201).json(
@@ -260,7 +260,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
     const product = await Product.findById(id);
 
     if (!product) {
-        throw new ApiError(404, "Product not found");
+        throw new ApiError(3, "Product not found");
     }
 
     if (product.productImage) {
@@ -283,7 +283,7 @@ const addCategory = asyncHandler(async (req, res) => {
 
     let existing = await Category.findOne({ categoryName });
     if (existing) {
-        throw new ApiError(404, "Category Already Exist");
+        throw new ApiError(403, "Category Already Exist");
     }
     const isCategoryExist = await Category.create({ categoryName });
 
@@ -329,7 +329,7 @@ const addModel = asyncHandler(async (req, res) => {
 
     let existing = await Model.findOne({ modelName });
     if (existing) {
-        throw new ApiError(404, "Model Already Exist");
+        throw new ApiError(403, "Model Already Exist");
     }
     const isModalExist = await Model.create({ modelName });
 
@@ -378,7 +378,7 @@ const getHeroSection = asyncHandler(async (req, res) => {
     console.log("items",items)
 
     if (items.length === 0) {
-        throw new ApiError(404, "There is no currently hero items found");
+        throw new ApiError(402, "There is no currently hero items found");
     }
 
     return res
@@ -395,7 +395,7 @@ const deleteHeroSection = asyncHandler(async (req, res) => {
     const product = await Hero.findById(id);
 
     if (!product) {
-        throw new ApiError(404, "Product not found");
+        throw new ApiError(403, "Product not found");
     }
 
     if (product.image) {
