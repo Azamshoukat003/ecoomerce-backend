@@ -90,7 +90,7 @@ const verifyOtp = asyncHandler(async (req, res) => {
     const { email, otp } = req.body;
     const user = await User.findOne({ email });
 
-    if (!user) throw new ApiError(404, "User not found");
+    if (!user) throw new ApiError(402, "User not found");
     if (user.isVerified) throw new ApiError(400, "User already verified");
     if (!user.otp || !user.optExpires) throw new ApiError(400, "No OTP found");
     if (Date.now() > user.optExpires) throw new ApiError(400, "OTP expired");
@@ -119,13 +119,13 @@ const loginUser = asyncHandler(async (req, res) => {
     const { email, password, rememberMe } = req.body;
 
     if (!email && !password) {
-        throw new ApiError(404, "Email and Password is required");
+        throw new ApiError(402, "Email and Password is required");
     }
 
     const user = await User.findOne({ email });
     console.log(user, "User");
     if (!user) {
-        throw new ApiError(404, "User Does not exist");
+        throw new ApiError(402, "User Does not exist");
     }
 
     if (!user.isVerified) {
@@ -135,7 +135,7 @@ const loginUser = asyncHandler(async (req, res) => {
     const isPasswordValid = await user.isPasswordCorrect(password);
     console.log(isPasswordValid, "password");
     if (!isPasswordValid) {
-        throw new ApiError(404, "Password is Incorrect");
+        throw new ApiError(403, "Password is Incorrect");
     }
 
     const tokenExpiry = rememberMe ? "7d" : "1m";
